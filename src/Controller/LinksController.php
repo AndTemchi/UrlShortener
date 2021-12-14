@@ -25,7 +25,7 @@ class LinksController
      * @Route ("/links/{id}", methods={"PATCH"})
      * @return Response
      */
-    public function update(): Response
+    public function update(string $id): Response
     {
 
     }
@@ -34,7 +34,7 @@ class LinksController
      * @Route ("/links/{id}", methods={"DELETE"})
      * @return Response
      */
-    public function delete(): Response
+    public function delete(string $id): Response
     {
 
     }
@@ -43,7 +43,7 @@ class LinksController
      * @Route ("/links/{id}", methods={"GET"})
      * @return Response
      */
-    public function show(): Response
+    public function show(string $id): Response
     {
 
     }

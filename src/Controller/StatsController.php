@@ -9,7 +9,7 @@ class StatsController
      * @Route ("/stats/{id}", methods={"GET"})
      * @return Response
      */
-    public function aggregate(): Response
+    public function aggregate(string $id): Response
     {
 
     }

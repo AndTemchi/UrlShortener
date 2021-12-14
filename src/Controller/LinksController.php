@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controller;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,7 +12,7 @@ class LinksController
      * @Route("/links", methods={"POST"})
      *
      * @return Response
-     * @throws Exception
+     * @throws \Exception
      */
     public function create(): Response
     {
@@ -23,6 +25,7 @@ class LinksController
 
     /**
      * @Route ("/links/{id}", methods={"PATCH"})
+     * @param string $id
      * @return Response
      */
     public function update(string $id): Response
@@ -32,6 +35,7 @@ class LinksController
 
     /**
      * @Route ("/links/{id}", methods={"DELETE"})
+     * @param string $id
      * @return Response
      */
     public function delete(string $id): Response
@@ -41,6 +45,7 @@ class LinksController
 
     /**
      * @Route ("/links/{id}", methods={"GET"})
+     * @param string $id
      * @return Response
      */
     public function show(string $id): Response

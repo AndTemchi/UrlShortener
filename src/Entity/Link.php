@@ -18,7 +18,7 @@ class Link
 
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=KeywordGenerator::class)
      * @ORM\Column(type="string", length=200, unique=true)
      */

@@ -33,7 +33,7 @@ class LinksController extends AbstractController
         $entityManager->persist($link);
         $entityManager->flush();
 
-        return new Response('Saved new link with keywork ' . $link->getKeyword(), 201);
+        return new Response('Saved new link with keywork '.$link->getKeyword(), 201);
     }
 
     /**
@@ -48,14 +48,14 @@ class LinksController extends AbstractController
 
         if (!$link) {
             throw $this->createNotFoundException(
-                'No product found for id ' . $id
+                'No product found for id '.$id
             );
         }
 
-        $link->setTitle('google' . rand(1, 100));
+        $link->setTitle('google'.rand(1, 100));
         $entityManager->flush();
 
-        return new Response('Saved new link with keywork ' . $link->getKeyword());
+        return new Response('Saved new link with keywork '.$link->getKeyword());
     }
 
     /**
@@ -70,12 +70,13 @@ class LinksController extends AbstractController
 
         if (!$link) {
             throw $this->createNotFoundException(
-                'No product found for id ' . $id
+                'No product found for id '.$id
             );
         }
 
         $entityManager->remove($link);
         $entityManager->flush();
+
         return new Response('', 204);
     }
 
@@ -90,10 +91,11 @@ class LinksController extends AbstractController
 
         if (!$link) {
             throw $this->createNotFoundException(
-                'No link found for keyword ' . $id
+                'No link found for keyword '.$id
             );
         }
-        return new Response('Link with url ' . $link->getUrl());
+
+        return new Response('Link with url '.$link->getUrl());
     }
 
     /**

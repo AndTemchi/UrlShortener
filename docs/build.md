@@ -2,8 +2,9 @@
 
 ## Selecting a Symfony Skeleton
 
-By default, Symfony Docker will install the minimalist skeleton.
-To install the ["website skeleton"](https://symfony.com/doc/current/setup.html#creating-symfony-applications), use the following command:
+By default, Symfony Docker will install the minimalist skeleton. To install
+the ["website skeleton"](https://symfony.com/doc/current/setup.html#creating-symfony-applications), use the following
+command:
 
     SKELETON=symfony/website-skeleton docker-compose up --build
 
@@ -17,8 +18,8 @@ For instance, use the following command to install Symfony 4.4:
 
 ## Installing Development Versions of Symfony
 
-To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
-The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
+To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build. The value must
+be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
 
 For instance, use the following command to use the `master` branch of Symfony:
 

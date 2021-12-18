@@ -10,8 +10,9 @@ services:
   _defaults:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    $charset: '%env(resolve:CHARSET)%'
-    $keywordLength: '%env(resolve:KEYWORDLENGTH))%'
+    bind:
+      string $charset: '%env(resolve:CHARSET)%'
+      int $keywordLength: '%env(resolve:KEYWORDLENGTH)%'
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
@@ -22,6 +23,10 @@ services:
       - '../src/Entity/'
       - '../src/Kernel.php'
       - '../src/Tests/'
+
+  App\EventListener\RequestTransformerListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.request }
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

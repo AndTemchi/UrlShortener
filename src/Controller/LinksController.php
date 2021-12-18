@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace App\Controller;
 
 use App\Entity\Link;
+use App\Service\UrlTitleService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LinksController extends AbstractController
@@ -15,25 +21,40 @@ class LinksController extends AbstractController
      * @Route("/links", methods={"POST"}, name="links_create")
      *
      * @param ManagerRegistry $doctrine
+     * @param UrlTitleService $titleService
      * @return Response
      */
-    public function create(ManagerRegistry $doctrine): Response
+    public function create(Request $request, ManagerRegistry $doctrine, UrlTitleService $titleService): Response
     {
+        // code in style of fat controller, because of no time... Need to do validations, some service etc
+        if (empty($request->get('long_url'))) {
+            throw new BadRequestHttpException('long_url is required');
+        }
 
-        $entityManager = $doctrine->getManager();
         $link = new Link();
-        //$link->setKeyword('1');
-        $link->setUrl('google.com');
+        $link->setUrl($request->get('long_url')); //todo: need to validate url
+        //todo: need to check internal redirection loops
+        if (!empty ($request->get('title'))) {
+            $link->setTitle($request->get('title'));
+        } else {
+            $link->setTitle($titleService->getTitle($link->getUrl()));
+        }
+
         $link->setClicks(0);
         $link->setDate(new \DateTime());
         $link->setIp('192.168.1.1');
-        $link->setTitle('google');
-        $link->setTags(['first', 'link']);
+        if (is_array($request->get('tags'))) {
+            $link->setTags($request->get('tags', []));
+        }
+
+        $entityManager = $doctrine->getManager();
 
         $entityManager->persist($link);
+
         $entityManager->flush();
 
-        return new Response('Saved new link with keywork '.$link->getKeyword(), 201);
+        $result = $doctrine->getRepository(Link::class)->findOneBy(['url' => $link->getUrl()]);
+        return $this->json($result,201);
     }
 
     /**
@@ -77,7 +98,7 @@ class LinksController extends AbstractController
         $entityManager->remove($link);
         $entityManager->flush();
 
-        return new Response('', 204);
+        return $this->json([], 204);
     }
 
     /**
@@ -95,7 +116,7 @@ class LinksController extends AbstractController
             );
         }
 
-        return new Response('Link with url '.$link->getUrl());
+        return $this->json($link);
     }
 
     /**
@@ -104,6 +125,6 @@ class LinksController extends AbstractController
      */
     public function list(): Response
     {
-
+        
     }
 }

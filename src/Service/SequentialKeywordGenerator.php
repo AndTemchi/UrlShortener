@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Exception\NextIdNotFound;
@@ -32,6 +34,8 @@ class SequentialKeywordGenerator extends AbstractIdGenerator
         $this->linkRepository = $linkRepository;
         $this->charset = $charset;
         $this->keywordLength = $keywordLength;
+
+
     }
 
     public function generate(EntityManager $em, $entity)
@@ -72,8 +76,8 @@ class SequentialKeywordGenerator extends AbstractIdGenerator
         $charsetLen = strlen($this->charset);
         while ($strLen < $this->keywordLength) {
             while ($number >= $charsetLen) {
-                $mod = bcmod($number, $charsetLen);
-                $number = bcdiv($number, $charsetLen);
+                $mod = bcmod($number, (string)$charsetLen);
+                $number = bcdiv($number, (string)$charsetLen);
                 $str = $this->charset[$mod].$str;
             }
             $str = $this->charset[(int)$number].$str;

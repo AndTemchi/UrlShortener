@@ -145,6 +145,9 @@
     "symfony/doctrine-bridge": {
         "version": "v6.0.1"
     },
+    "symfony/dom-crawler": {
+        "version": "v6.0.1"
+    },
     "symfony/dotenv": {
         "version": "v6.0.1"
     },
@@ -193,6 +196,12 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
+    },
+    "symfony/http-client": {
+        "version": "v6.0.1"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v3.0.0"
     },
     "symfony/http-foundation": {
         "version": "v6.0.1"
@@ -252,8 +261,24 @@
     "symfony/string": {
         "version": "v6.0.1"
     },
+    "symfony/translation-contracts": {
+        "version": "v3.0.0"
+    },
     "symfony/uid": {
         "version": "v6.0.1"
+    },
+    "symfony/validator": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "3eb8df139ec05414489d55b97603c5f6ca0c44cb"
+        },
+        "files": [
+            "config/packages/test/validator.yaml",
+            "config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v6.0.1"

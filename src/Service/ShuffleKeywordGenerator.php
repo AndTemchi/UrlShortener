@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Repository\LinkRepository;
@@ -24,7 +26,8 @@ class ShuffleKeywordGenerator extends AbstractIdGenerator
 
     public function generate(EntityManager $em, $entity)
     {
-        $ok = false;
+        return random_int(1, 100);
+        /*$ok = false;
         do {
             $keyword = $this->randomString();
             if (!$this->isKeywordExists($keyword)) {
@@ -32,7 +35,7 @@ class ShuffleKeywordGenerator extends AbstractIdGenerator
             }
         } while (!$ok);
 
-        return $keyword;
+        return $keyword;*/
     }
 
     private function randomString(): string
